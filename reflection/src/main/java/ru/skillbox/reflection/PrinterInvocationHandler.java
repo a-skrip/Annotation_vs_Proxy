@@ -16,8 +16,10 @@ public class PrinterInvocationHandler implements InvocationHandler {
         if (!method.isAnnotationPresent(AccessAllowed.class)) {
             return method.invoke(orignalPrinter, args);
         }
+        //получаем значение аннотации
         AccessAllowed accessAllowed = method.getAnnotation(AccessAllowed.class);
-        if(accessAllowed.value()) {
+
+        if (accessAllowed.value()) {
             return method.invoke(orignalPrinter, args);
         } else {
             System.out.println("ACCESS DENIED!");
